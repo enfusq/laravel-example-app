@@ -20,4 +20,19 @@ class PostController extends Controller
        $post = Post::find($id);
        return view('posts.show', ['post' => $post]);
     }
+
+    public function create() {
+        return view('posts.create');
+    }
+
+    public function store(Request $request) {
+        \Log::debug($request);
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+        ];
+
+        Post::create($data);
+        return redirect('posts');
+    }
 }
